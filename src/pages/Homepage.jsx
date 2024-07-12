@@ -11,7 +11,10 @@ function Homepage() {
   const [lastMessages, setLastMessages] = useState({});
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredChatsByCreator, setFilteredChatsByCreator] = useState([]);
-  const [isChatSelected, setIsChatSelected] = useState(false); // New state to manage visibility of container-left
+  const [isChatSelected, setIsChatSelected] = useState(false); 
+  const [isDarkMode, setIsDarkMode] = useState(false); 
+  const [showSettingsPopup, setShowSettingsPopup] = useState(false);
+
   const currentUser = {
     id: 1,
     name: 'BeyondChat',
@@ -108,8 +111,32 @@ function Homepage() {
 
   const handleChatClick = (creatorName) => {
     filterChatsByCreator(creatorName);
-    setIsChatSelected(true); // Update state to hide container-left
+    if(window.innerWidth<600){
+      setIsChatSelected(true); 
+    }
   };
+
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+
+  };
+
+  const toggleSettingsPopup = () => {
+    setShowSettingsPopup(!showSettingsPopup);
+  };
+
+  useEffect(() => {
+    if (isDarkMode) {
+      document.body.classList.add('dark-mode');
+      document.getElementById('indi').style.right="2px";
+      document.getElementById('indi').style.left= 'auto';
+    } else {
+      document.body.classList.remove('dark-mode');
+      document.getElementById('indi').style.left='2px';
+      document.getElementById('indi').style.right= 'auto';
+
+    }
+  }, [isDarkMode]);
 
   return (
     <section className='Telegramhomepage'>
@@ -159,7 +186,7 @@ function Homepage() {
                 <div><i style={{color:'rgb(138 155 185)',padding:"0 20px"}} className='bx bxs-user-circle'></i></div>
                 <div><i style={{color:'rgb(138 155 185)',padding:"0 20px"}} className='bx bxs-phone' ></i></div>
                 <div><i style={{color:'rgb(138 155 185)',padding:"0 20px"}} className='bx bxs-chat'></i></div>
-                <div><i style={{color:'rgb(138 155 185)',padding:"0 20px"}} className='bx bxs-cog' ></i></div>
+                <div onClick={toggleSettingsPopup}><i style={{color:'rgb(138 155 185)',padding:"0 20px"}} className='bx bxs-cog' ></i></div>
               </div>
             </ul>
           ) : (
@@ -227,8 +254,28 @@ function Homepage() {
           <p className="no-filtered-chats">Select a chat to start messaging</p>
         )}
       </div>
+
+      {showSettingsPopup && (
+        <div className="settings-popup">
+          <div className="popup-content">
+            <h2>Settings</h2>
+            <div className="dark-mode-toggle">
+              <label>
+              <div id='indi' className='Indigater'></div>
+                <input
+                  type="checkbox"
+                  checked={isDarkMode}
+                  onChange={toggleDarkMode}
+                />
+              </label>
+            </div>
+            <button onClick={toggleSettingsPopup}>Close</button>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
 
 export default Homepage;
+  

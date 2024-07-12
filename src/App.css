@@ -1,4 +1,4 @@
-/* Remove scrollbar and enable scrolling without displaying it */
+Remove scrollbar and enable scrolling without displaying it
 
 .leftcontainer {
   border-right: 1px solid #2D3748;
@@ -261,3 +261,59 @@ outline: none;
   justify-content:space-between;
 
 }
+
+body.dark-mode {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+.settings-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #2D3748;
+  border-radius: 10px;
+  width: 200px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+.settings-popup button{
+  background-color:#18222c;
+  color:#bfc9d3;
+  padding: 10px 25px;
+  border: none;
+  
+}
+.dark-mode-toggle input {
+display: none;
+}
+.dark-mode-toggle label{
+  display: block;
+  background-color: green;
+  width: 50px;
+  height: 20px;
+  position: relative;
+  border-radius: 100px;
+  padding: 2px;
+}
+.Indigater  {
+  left: 2;
+width: 20px;
+border-radius: 20px;
+height: 20px;
+background-color: #384552;
+position: absolute;
+}
+
+.settings-popup .popup-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dark-mode-toggle {
+  margin: 10px 0;
+}
+
